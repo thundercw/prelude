@@ -63,6 +63,9 @@
 ;;;set mark command
 (global-set-key (kbd "M-m") 'set-mark-command)
 
+;;;youdao translate
+(global-set-key (kbd "C-c C-v") 'youdao-dictionary-search-at-point+)
+
 ;;; shutup
 (setq visible-bell t)
 
@@ -93,6 +96,7 @@
 
 ;;; jump buffer
 (require 'ace-jump-buffer)
+(global-set-key (kbd "M-j") 'ace-jump-char-mode)
 
 ;;; jump window
 (require 'ace-window)
@@ -124,31 +128,47 @@
 ;; use American English as ispell default dictionary
 (ispell-change-dictionary "american" t)
 
-;;; scroll display
+;;;;; scroll display
+;;(defun hode-line-scroll-up()
+;;  "Scroll the page with the cursor in the same line"
+;;  (interactive)
+;;  ;; move the cursor also
+;;  (let ((tmp (current-column)))
+;;    (scroll-up 1)
+;;    (line-move-to-column tmp)
+;;    (forward-line 1)
+;;    )  
+;;  )
+;;(defun hode-line-scroll-down()
+;;  "Scroll the page with the cursor in the same line"
+;;  (interactive)
+;;  ;; move the cursor also
+;;  (let ((tmp (current-column)))
+;;    (scroll-down 1)
+;;    (line-move-to-column tmp)
+;;    (forward-line 1)
+;;    )
+;;  )
+;;
+;;(global-set-key (kbd "M-n") 'hode-line-scroll-up)
+;;(global-set-key (kbd "M-p") 'hode-line-scroll-down)
 (defun hode-line-scroll-up()
   "Scroll the page with the cursor in the same line"
   (interactive)
-  ;; move the cursor also
-  (let ((tmp (current-column)))
-    (scroll-up 1)
-    (line-move-to-column tmp)
-    (forward-line 1)
-    )  
-  )
+  (let ((next-screen-context-lines
+         (count-lines
+          (window-start)(window-end))))
+    (scroll-up)))
+(global-set-key (kbd "M-n") 'hode-line-scroll-up)
+
 (defun hode-line-scroll-down()
   "Scroll the page with the cursor in the same line"
   (interactive)
-  ;; move the cursor also
-  (let ((tmp (current-column)))
-    (scroll-down 1)
-    (line-move-to-column tmp)
-    (forward-line 1)
-    )
-  )
-
-(global-set-key (kbd "M-n") 'hode-line-scroll-up)
+  (let ((next-screen-context-lines
+         (count-lines
+          (window-start)(window-end))))
+  (scroll-down)))
 (global-set-key (kbd "M-p") 'hode-line-scroll-down)
-
 
 (provide 'myconfig)
 ;;; myconfig.el ends here
