@@ -65,7 +65,7 @@
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
 (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ;;make tab work in terminal
 (define-key helm-map (kbd "C-z") 'helm-select-action);;list actions using C-z
-
+(setq helm-ag-insert-at-point `symbol)
 
 ;;;set mark command
 (global-set-key (kbd "M-m") 'set-mark-command)
